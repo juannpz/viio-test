@@ -1,11 +1,17 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import Login from './views/Login'
 
-function App() {
-  
+const App = () => {
 
   return (
-    <>
-    </>
+    <Routes>
+      <Route
+        path='/login'
+        element={<Login/>}
+      />
+
+    </Routes>
   )
 }
 

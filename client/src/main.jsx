@@ -14,7 +14,7 @@ if (typeof global === 'undefined') {
   window.global = window;
 }
 
-axios.defaults.baseURL = "https://api-chat.whatacart.ai" 
+axios.defaults.baseURL = "http://localhost:3000" 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
