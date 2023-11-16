@@ -20,18 +20,14 @@ export const postLoginFailure = (error) => {
   };
 };
 
-export const postLogin = ({email, password, token}) => {
+export const postLogin = (formData) => {
   return async (dispatch) => {
     try {
       dispatch(postLoginRequest());
-      const response = await axios.post('/login', email, password, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post('/login', formData)
       const userData = response.data;
       dispatch({
-        type:ACTION_TYPES.CREATE_BUSINESS_SUCCESS,
+        type:ACTION_TYPES.POST_LOGIN_SUCCESS,
         payload: userData
       });
     } catch (error) {

@@ -1,10 +1,10 @@
 const loginController = require("../../controllers/login/loginController");
 
 const loginHandler = async (req, res) => {
-  const { email, password } = req.body;
+  const formData = req.body;
 
   try {
-    const result = await loginController({ email, password });
+    const result = await loginController({ formData });
     if (result) {
       res.status(200).json(result);
     } else {
