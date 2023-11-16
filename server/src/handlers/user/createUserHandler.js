@@ -1,19 +1,19 @@
 // handlers/register/registerHandler.js
-const createUserController = require('../../controllers/user/createUserController');
+const createUserController = require('../../controllers/user/createUserController')
 
 const createUserHandler = async (req, res) => {
-  const { name, lastname, email, password } = req.body;
-
+  const formData = req.body;
+  const {firstName, lastName, email, password} = formData
   try {
-    const newUser = await createUserController({ name, lastname, email, password });
+    const newUser = await createUserController({ firstName, lastName, email, password })
     res.status(201).json({
       id: newUser.id,
-      name: newUser.name,
-      lastname: newUser.lastname,
+      name: newUser.firstName,
+      lastname: newUser.lastName,
       email: newUser.email,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message })
   }
 };
 

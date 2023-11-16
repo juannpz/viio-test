@@ -6,7 +6,7 @@ const routes = require("./routes/index");
 const server = express()
 server.use(
   cors({
-    origin: "*", // Permitir cualquier origen durante el desarrollo
+    origin: "*",
     methods: "GET, POST, OPTIONS, PATCH, PUT, DELETE",
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })

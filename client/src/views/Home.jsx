@@ -8,9 +8,10 @@ const Home = () => {
     const dispatch = useDispatch()
     const loginData = useSelector((state) => state.loginData)
 
+
     useEffect(() => {
         loginData?.token && dispatch(clearLoginData())
-    }, [loginData])
+    }, [])
     
 
     return (
