@@ -11,15 +11,15 @@ import axios from "axios";
 import store from "./redux/store.js"
 
 if (typeof global === 'undefined') {
-  window.global = window;
+    window.global = window;
 }
 
 axios.defaults.baseURL = "http://localhost:3000" 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-  </BrowserRouter>
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>
 );
