@@ -4,15 +4,14 @@ import Login from './views/Login'
 
 const App = () => {
 
-  return (
-    <Routes>
-      <Route
-        path='/login'
-        element={<Login/>}
-      />
-
-    </Routes>
-  )
+    return (
+        <Routes>
+            <Route
+                path='/'
+                element={<Login/>}
+            />
+        </Routes>
+    )
 }
 
 export default App

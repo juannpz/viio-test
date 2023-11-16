@@ -1,7 +1,7 @@
 import ACTION_TYPES from './actionsTypes'
 
 const initialState = {
-    userData: {}
+    loginData: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
     case ACTION_TYPES.POST_LOGIN_SUCCESS:
         return {
             ...state,
-            userData: action.payload,
+            loginData: action.payload,
         };
     case ACTION_TYPES.POST_LOGIN_FAILURE:
         return state;
