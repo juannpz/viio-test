@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { postLogin } from "../redux/actions/login/postLogin"
+import { clearLoginData, postLogin } from "../redux/actions/login/postLogin"
 import { useNavigate } from "react-router-dom";
+import { notEmpty, notEmptyStrings, validateEmail, validatePassword } from "../utils/validations";
+import { toast } from 'react-toastify';
 
 const emptyForm = {
   email: "",
@@ -18,6 +20,7 @@ const LoginForm = () => {
 
     const handleFormChange = (event) => {
         const {name, value} = event.target
+
         setFormData({
             ...formData,
             [name]: value
@@ -26,26 +29,27 @@ const LoginForm = () => {
 
     const handleFormSubmit = (event) => {
         event.preventDefault()
-        dispatch(postLogin(formData))
+
+        if (formData.email.length > 1 && formData.password.length > 1) dispatch(postLogin(formData))
+        setFormData(emptyForm)
     }
 
     useEffect(() => {
-        loginData?.token && navigate("/home")
-
-        return () => {
-            localStorage.setItem("userData", JSON.stringify(loginData))
+        if (loginData?.token) {
+            localStorage.setItem("loginData", JSON.stringify(loginData))
+            navigate("/home")
         }
     }, [loginData])
     
     
 
     return (
-        <form className="flex flex-col space-y-4">
-            <label>
+        <form className="flex flex-col space-y-4" onSubmit={handleFormSubmit}>
+            <label className="text-left">
                 Email
                 <input type="email" name="email" value={formData.email} onChange={handleFormChange} className="block w-full mt-1" />
             </label>
-            <label>
+            <label className="text-left">
                 Password
                 <input type="password" name="password" value={formData.password} onChange={handleFormChange} className="block w-full mt-1" />
             </label>
@@ -54,13 +58,13 @@ const LoginForm = () => {
                     <input type="checkbox" />
                     <span>Remember me</span>
                 </label>
-                <button className="text-blue-500 ml-4">Forgot password?</button>
+                <button type="button" className="text-blue-500 ml-4">Forgot password?</button>
             </div>
-            <button className="bg-blue-500 text-white py-2 rounded" onClick={handleFormSubmit} >Log in</button>
-            <button className="bg-red-500 text-white py-2 rounded">Continue with Google</button>
+            <button className="bg-blue-500 text-white py-2 rounded" type="submit">Log in</button>
+            <button type="button" className="bg-red-500 text-white py-2 rounded">Continue with Google</button>
             <div className="flex items-center justify-center space-x-2">
                 <span>Dont have an account?</span>
-                <button className="text-blue-500">Sign up</button>
+                <button type="button" className="text-blue-500">Sign up</button>
             </div>
         </form>
     )

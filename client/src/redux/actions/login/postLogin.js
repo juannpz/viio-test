@@ -20,6 +20,12 @@ export const postLoginFailure = (error) => {
     };
 };
 
+export const clearLoginData = () => {
+    return {
+        type: ACTION_TYPES.CLEAR_LOGIN_DATA,
+    }
+}
+
 export const postLogin = (formData) => {
     return async (dispatch) => {
         try {
