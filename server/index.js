@@ -5,6 +5,6 @@ const { conn } = require("./src/db.js")
 const PORT = 3000
 
 server.listen(PORT, async () => {
-  await conn.sync({ force: false, alter: true })
+  await conn.sync({ force: false, alter: false })
   console.log(`server listening at ${PORT}`)
 })

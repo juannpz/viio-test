@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Login from './views/Login'
 import Home from './views/Home'
 import Register from './components/forms/RegisterForm'
 import { ToastContainer } from 'react-toastify';
+import Landing from './views/Landing'
 
 const App = () => {
 
@@ -13,7 +13,7 @@ const App = () => {
             <Routes>
                 <Route
                     path='/'
-                    element={<Login />}
+                    element={<Landing />}
                 />
                 <Route
                     path='/home'

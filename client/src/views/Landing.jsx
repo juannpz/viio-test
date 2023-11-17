@@ -1,13 +1,13 @@
 import LoginForm from "../components/forms/LoginForm"
 
-const Login = () => {
+const Landing = () => {
 
     return (
         <div>
             <LoginForm />
         </div>
     )
-    
+
 }
 
-export default Login
+export default Landing

@@ -37,7 +37,7 @@ export const postRegister = (formData) => {
                 payload: userData,
             })
         } catch (error) {
-            dispatch(postRegisterFailure(error.message))
+            dispatch(postRegisterFailure(error.response))
         }
     }
 }

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import { postRegister } from "../../redux/actions/register/postRegister";
+import { clearRegisterData, postRegister } from "../../redux/actions/register/postRegister";
 
 const emptyForm = {
     firstName: "",
@@ -73,22 +73,35 @@ const Register = () => {
             })
         }
         else {
-            toast.success("Registration successfull", {
-                autoClose: 2000,
-            })
-            setTimeout(() => {
-                dispatch(postRegister(formData))
-            }, 3000)
+            dispatch(postRegister(formData))
         }
     }
 
     useEffect(() => {
-        registerData?.email && navigate("/")
+        dispatch(clearRegisterData())
+    }, [])
+
+    useEffect(() => {
+        if (registerData?.data?.error) {
+            toast.error(registerData.data.error, {
+                autoClose: 2000,
+            })
+        } else if (registerData?.email) {
+            toast.success("Registration succesfull", {
+                autoClose: 2000,
+            })
+            localStorage.setItem("registerData", JSON.stringify(registerData))
+            setTimeout(() => {
+                registerData?.email && navigate("/")
+            }, 2500)
+        }
+
     }, [registerData])
 
     useEffect(() => {
         showErrors()
     }, [formData])
+
 
     return (
         <form
@@ -105,7 +118,7 @@ const Register = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleFormChange}
-                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700 px-1" />
 
                 {errors.firstName && <p className="text-red-500 text-sm max-w-p pt-1">{errors.firstName}</p>}
             </label>
@@ -119,7 +132,7 @@ const Register = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleFormChange}
-                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700 px-1" />
 
                 {errors.lastName && <p className="text-red-500 text-sm max-w-p pt-1">{errors.lastName}</p>}
             </label>
@@ -133,7 +146,7 @@ const Register = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleFormChange}
-                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700"
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700 px-1"
                     autoComplete="off"
                     placeholder="your@email.com" />
 
@@ -150,7 +163,8 @@ const Register = () => {
                     value={formData.password}
                     onChange={handleFormChange}
                     autoComplete="new-password"
-                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+                    placeholder="••••••••"
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700 px-1" />
 
                 {errors.password && <p className="text-red-500 text-sm max-w-p pt-1">{errors.password}</p>}
             </label>

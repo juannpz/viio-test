@@ -35,29 +35,36 @@ const LoginForm = () => {
         const emptyInputExist = Object.values(formData).some(value => value.trim() === '')
 
         if (emptyInputExist) {
-            toast.error("Completa todos los campos antes de enviar el formulario", {
+            toast.warn("Please complete all fields to continue", {
                 autoClose: 2000,
             })
         }
         else {
             dispatch(postLogin(formData))
-            // setFormData(emptyForm)
         }
     }
 
     useEffect(() => {
+        if (typeof (loginData?.data?.error) === 'string') {
+            toast.error(loginData.data.error, {
+                autoClose: 2000,
+            })
+        }
+
         if (loginData?.token) {
-            localStorage.setItem("loginData", JSON.stringify(loginData))
+            localStorage.setItem("loginData", loginData)
             navigate("/home")
         }
+        loginData && console.log(loginData);
     }, [loginData])
 
     useEffect(() => {
         if (registerData?.email) {
             toast.info(`Congrats ${registerData?.firstName}. You can log in now`)
-            localStorage.setItem("registerData", JSON.stringify(registerData))
             dispatch(clearRegisterData())
         }
+
+        registerData && console.log(registerData);
     }, [registerData])
 
 

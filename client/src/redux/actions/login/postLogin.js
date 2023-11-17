@@ -37,7 +37,7 @@ export const postLogin = (formData) => {
                 payload: userData
             });
         } catch (error) {
-            dispatch(postLoginFailure(error.message))
+            dispatch(postLoginFailure(error.response))
         }
     }
 }
