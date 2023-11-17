@@ -36,7 +36,7 @@ const LoginForm = () => {
 
         if (emptyInputExist) {
             toast.warn("Please complete all fields to continue", {
-                autoClose: 2000,
+                autoClose: 2000
             })
         }
         else {
@@ -60,7 +60,9 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (registerData?.email) {
-            toast.info(`Congrats ${registerData?.firstName}. You can log in now`)
+            toast.info(`${registerData?.firstName}, you can log in now`, {
+                autoClose: 2000
+            })
             dispatch(clearRegisterData())
         }
 

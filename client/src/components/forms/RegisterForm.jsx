@@ -87,13 +87,13 @@ const Register = () => {
                 autoClose: 2000,
             })
         } else if (registerData?.email) {
-            toast.success("Registration succesfull", {
+            toast.success("Registration succesfull. Redirecting to log in page", {
                 autoClose: 2000,
             })
             localStorage.setItem("registerData", JSON.stringify(registerData))
             setTimeout(() => {
                 registerData?.email && navigate("/")
-            }, 2500)
+            }, 3000)
         }
 
     }, [registerData])
