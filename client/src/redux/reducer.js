@@ -39,6 +39,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 registerData: action.payload,
             }
+
+        case ACTION_TYPES.CLEAR_REGISTER_DATA:
+            return {
+                ...state,
+                registerData: null
+            }
             
         default:
             return {

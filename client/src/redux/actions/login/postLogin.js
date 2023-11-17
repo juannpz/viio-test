@@ -1,24 +1,24 @@
-import axios from 'axios';
+import axios from 'axios'
 import ACTION_TYPES from '../../actionsTypes'
 
 export const postLoginRequest = () => {
     return {
         type: ACTION_TYPES.POST_LOGIN_REQUEST,
-    };
-};
+    }
+}
 
 export const postLoginSuccess = () => {
     return {
         type: ACTION_TYPES.POST_LOGIN_SUCCESS,
-    };
-};
+    }
+}
 
 export const postLoginFailure = (error) => {
     return {
         type: ACTION_TYPES.POST_LOGIN_FAILURE,
         payload: error,
-    };
-};
+    }
+}
 
 export const clearLoginData = () => {
     return {
@@ -29,7 +29,7 @@ export const clearLoginData = () => {
 export const postLogin = (formData) => {
     return async (dispatch) => {
         try {
-            dispatch(postLoginRequest());
+            dispatch(postLoginRequest())
             const response = await axios.post('/login', formData)
             const userData = response.data;
             dispatch({
@@ -37,7 +37,7 @@ export const postLogin = (formData) => {
                 payload: userData
             });
         } catch (error) {
-            dispatch(postLoginFailure(error.message));
+            dispatch(postLoginFailure(error.message))
         }
-    };
-};
+    }
+}

@@ -8,8 +8,8 @@ const createUserHandler = async (req, res) => {
     const newUser = await createUserController({ firstName, lastName, email, password })
     res.status(201).json({
       id: newUser.id,
-      name: newUser.firstName,
-      lastname: newUser.lastName,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       email: newUser.email,
     });
   } catch (error) {

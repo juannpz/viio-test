@@ -19,13 +19,29 @@ const Register = () => {
     // const loginData = JSON.parse(localStorage.getItem("loginData"))
     // const token = loginData?.token
     const [formData, setFormData] = useState(emptyForm)
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({})
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const registerData = useSelector((state) => state?.registerData)
+    const registerData = useSelector(state => state?.registerData)
+
+    const showErrors = () => {
+        const validationErrors = validate(formData)
+
+        setErrors({
+            ...errors,
+            ...validationErrors,
+        })
+    }
 
     const handleFormChange = (event) => {
         const { name, value } = event.target
+
+        if (value === "") {
+            setErrors({
+                ...errors,
+                [name]: undefined,
+            })
+        }
 
         setFormData({
             ...formData,
@@ -34,16 +50,35 @@ const Register = () => {
     }
 
     const handleFormSubmit = (event) => {
-        event.preventDefault()
-
+        event.preventDefault();
         const validationErrors = validate(formData);
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-            for (const error in validationErrors) {
-                toast.error(validationErrors[error]);
-            }
-        } else {
-            dispatch(postRegister(formData))
+
+        setErrors({
+            ...errors,
+            ...validationErrors,
+        })
+
+
+        const emptyInputExist = Object.values(formData).some(value => value.trim() === '')
+        const errorExist = Object.values(validationErrors).some(value => typeof (value) === 'string')
+
+        if (emptyInputExist) {
+            toast.warn("Please complete all fields to continue", {
+                autoClose: 2000,
+            })
+        }
+        else if (errorExist) {
+            toast.warn("Check invalid fields to continue", {
+                autoClose: 2000,
+            })
+        }
+        else {
+            toast.success("Registration successfull", {
+                autoClose: 2000,
+            })
+            setTimeout(() => {
+                dispatch(postRegister(formData))
+            }, 3000)
         }
     }
 
@@ -51,41 +86,122 @@ const Register = () => {
         registerData?.email && navigate("/")
     }, [registerData])
 
+    useEffect(() => {
+        showErrors()
+    }, [formData])
 
     return (
-        <form className="flex flex-col space-y-4 bg-gray-200 p-4 rounded border border-gray-300 shadow-lg" onSubmit={handleFormSubmit}>
-            <label className="text-left text-gray-800">
+        <form
+            noValidate
+            className="flex flex-col space-y-4 bg-gray-200 p-4 rounded border border-gray-300 shadow-lg"
+            onSubmit={handleFormSubmit}>
+
+            <label
+                className="text-left text-gray-800">
                 First name
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleFormChange} className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
-                {errors.firstName && <p className="text-red-500">{errors.firstName}</p>}
+
+                <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleFormChange}
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+
+                {errors.firstName && <p className="text-red-500 text-sm max-w-p pt-1">{errors.firstName}</p>}
             </label>
-            <label className="text-left text-gray-800">
+
+            <label
+                className="text-left text-gray-800">
                 Last name
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleFormChange} className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
-                {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
+
+                <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleFormChange}
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+
+                {errors.lastName && <p className="text-red-500 text-sm max-w-p pt-1">{errors.lastName}</p>}
             </label>
-            <label className="text-left text-gray-800">
+
+            <label
+                className="text-left text-gray-800">
                 Email
-                <input type="email" name="email" value={formData.email} onChange={handleFormChange} className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
+
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleFormChange}
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700"
+                    autoComplete="off"
+                    placeholder="your@email.com" />
+
+                {errors.email && <p className="text-red-500 text-sm max-w-p pt-1">{errors.email}</p>}
             </label>
-            <label className="text-left text-gray-800">
+
+            <label
+                className="text-left text-gray-800">
                 Password
-                <input type="password" name="password" value={formData.password} onChange={handleFormChange} className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
-                {errors.password && <p className="text-red-500">{errors.password}</p>}
+
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleFormChange}
+                    autoComplete="new-password"
+                    className="block w-full mt-1 border border-gray-500 rounded outline-none focus:ring-2 focus:ring-gray-500 bg-transparent text-gray-700" />
+
+                {errors.password && <p className="text-red-500 text-sm max-w-p pt-1">{errors.password}</p>}
             </label>
-            <div className="flex items-center justify-between">
-                <label className="flex items-center space-x-2">
-                    <input type="checkbox" className="rounded border-gray-300" />
-                    <span className="text-gray-700">Remember me</span>
+
+            <div
+                className="flex items-center justify-between">
+
+                <label
+                    className="flex items-center space-x-2">
+
+                    <input
+                        type="checkbox"
+                        className="rounded border-gray-300" />
+
+                    <span
+                        className="text-gray-700">Remember me</span>
                 </label>
-                <button type="button" className="text-blue-500 ml-4 hover:underline">Forgot password?</button>
+
+                <button
+                    type="button"
+                    className="text-blue-500 ml-4 hover:underline">
+                    Forgot password?
+                </button>
             </div>
-            <button className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors duration-300" type="submit">Sign Up</button>
-            <button type="button" className="bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors duration-300">Continue with Google</button>
-            <div className="flex items-center justify-center space-x-2">
-                <span className="text-gray-700">Already have an account?</span>
-                <button type="button" className="text-blue-500 hover:underline" onClick={() => navigate("/")}>Log in</button>
+
+            <button
+                className="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors duration-300"
+                type="submit">
+                Sign Up
+            </button>
+
+            <button
+                type="button"
+                className="bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors duration-300">
+                Continue with Google
+            </button>
+
+            <div
+                className="flex items-center justify-center space-x-2">
+
+                <span
+                    className="text-gray-700">
+                    Already have an account?
+                </span>
+
+                <button
+                    type="button"
+                    className="text-blue-500 hover:underline"
+                    onClick={() => navigate("/")}>
+                    Log in
+                </button>
             </div>
         </form>
     )
