@@ -1,5 +1,7 @@
 const verifyJwtController = async () => {
-    return true
+    return {
+        verified: true,
+    }
 };
 
 module.exports = verifyJwtController;

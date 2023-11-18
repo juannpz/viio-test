@@ -35,9 +35,9 @@ export const postLogin = (formData) => {
             dispatch({
                 type:ACTION_TYPES.POST_LOGIN_SUCCESS,
                 payload: userData
-            });
+            })
         } catch (error) {
-            dispatch(postLoginFailure(error.response))
+            dispatch(postLoginFailure(error.response.data))
         }
     }
 }

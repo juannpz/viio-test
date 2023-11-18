@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
@@ -49,16 +50,16 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-        if (loginData?.data?.error) {
-            toast.error(loginData.data.error, {
+        if (loginData?.error) {
+            toast.error(loginData.error, {
                 autoClose: 2000,
                 position: "top-center",
             })
         }
 
-        if (loginData?.token || token) {
-            loginData?.token && localStorage.setItem(("loginData"), JSON.stringify(loginData))
-            dispatch(verifyJwt(loginData?.token || token))
+        if (loginData?.token) {
+            localStorage.setItem(("loginData"), JSON.stringify(loginData))
+            dispatch(verifyJwt(loginData.token))
         }
     }, [loginData])
 
@@ -75,14 +76,14 @@ const LoginForm = () => {
     }, [registerData])
 
     useEffect(() => {
-        if (verified) {
+        if (verified?.verified) {
             navigate("/home")
         }
 
         return () => {
             loginData && dispatch((clearLoginData()))
         }
-    }, [verified])
+    }, [verified?.verified])
 
 
     return (

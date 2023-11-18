@@ -4,6 +4,7 @@ const initialState = {
     loginData: null,
     registerData: null,
     verified: null,
+    products: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -65,6 +66,26 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 verified: null
+            }
+
+
+        //GET PRODUCTS
+        case ACTION_TYPES.GET_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                products: action.payload,
+            }
+            
+        case ACTION_TYPES.GET_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                products: action.payload,
+            }
+
+        case ACTION_TYPES.CLEAR_PRODUCTS:
+            return {
+                ...state,
+                products: null
             }
             
         default:

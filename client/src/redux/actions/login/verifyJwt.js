@@ -41,7 +41,8 @@ export const verifyJwt = (token) => {
                 payload: verified
             })
         } catch (error) {
-            dispatch(verifyJwtFailure(error.response))
+            console.log(error.response);
+            dispatch(verifyJwtFailure(error.response.data))
         }
     }
 }
