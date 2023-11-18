@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { clearRegisterData, postRegister } from "../../redux/actions/register/postRegister";
+import { clearLoginData } from "../../redux/actions/login/postLogin";
 
 const emptyForm = {
     firstName: "",
@@ -23,6 +24,7 @@ const Register = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const registerData = useSelector(state => state?.registerData)
+    const loginData = useSelector(state => state?.loginData)
 
     const showErrors = () => {
         const validationErrors = validate(formData)
@@ -65,11 +67,13 @@ const Register = () => {
         if (emptyInputExist) {
             toast.warn("Please complete all fields to continue", {
                 autoClose: 2000,
+                position: "top-center",
             })
         }
         else if (errorExist) {
             toast.warn("Check invalid fields to continue", {
                 autoClose: 2000,
+                position: "top-center",
             })
         }
         else {
@@ -85,23 +89,29 @@ const Register = () => {
         if (registerData?.data?.error) {
             toast.error(registerData.data.error, {
                 autoClose: 2000,
+                position: "top-center",
             })
         } else if (registerData?.email) {
             toast.success("Registration succesfull. Redirecting to log in page", {
                 autoClose: 2000,
+                position: "top-center"
             })
             localStorage.setItem("registerData", JSON.stringify(registerData))
             setTimeout(() => {
                 registerData?.email && navigate("/")
-            }, 3000)
+            }, 4000)
         }
-
     }, [registerData])
 
     useEffect(() => {
         showErrors()
     }, [formData])
 
+    useEffect(() => {
+        return () => {
+            loginData?.token && dispatch(clearLoginData())
+        }
+    }, [])
 
     return (
         <form

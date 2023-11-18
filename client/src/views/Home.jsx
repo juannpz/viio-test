@@ -2,16 +2,19 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { clearLoginData } from "../redux/actions/login/postLogin"
+import { clearRegisterData } from "../redux/actions/register/postRegister"
 
 const Home = () => {
 
     const dispatch = useDispatch()
-    const loginData = useSelector((state) => state.loginData)
+    const loginDataFromRedux = useSelector(state => state?.loginData)
+    const registerDataFromRedux = useSelector(state => state?.registerData)
 
 
     useEffect(() => {
-        loginData?.token && dispatch(clearLoginData())
-    }, [])
+        loginDataFromRedux?.token && dispatch(clearLoginData())
+        registerDataFromRedux?.token && dispatch(clearRegisterData())
+    }, [loginDataFromRedux, registerDataFromRedux])
     
 
     return (

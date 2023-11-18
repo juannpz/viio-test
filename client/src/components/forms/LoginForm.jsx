@@ -2,10 +2,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { postLogin } from "../../redux/actions/login/postLogin"
+import { clearLoginData, postLogin } from "../../redux/actions/login/postLogin"
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { clearRegisterData } from "../../redux/actions/register/postRegister";
+import { verifyJwt } from "../../redux/actions/login/verifyJwt";
 
 const emptyForm = {
     email: "",
@@ -19,6 +20,8 @@ const LoginForm = () => {
     const loginData = useSelector((state) => state?.loginData)
     const registerData = useSelector(state => state?.registerData)
     const navigate = useNavigate()
+    const verified = useSelector(state => state?.verified)
+    const token = JSON.parse(localStorage.getItem("loginData"))?.token
 
     const handleFormChange = (event) => {
         const { name, value } = event.target
@@ -36,7 +39,8 @@ const LoginForm = () => {
 
         if (emptyInputExist) {
             toast.warn("Please complete all fields to continue", {
-                autoClose: 2000
+                autoClose: 2000,
+                position: "top-center",
             })
         }
         else {
@@ -45,29 +49,40 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-        if (typeof (loginData?.data?.error) === 'string') {
+        if (loginData?.data?.error) {
             toast.error(loginData.data.error, {
                 autoClose: 2000,
+                position: "top-center",
             })
         }
 
-        if (loginData?.token) {
-            localStorage.setItem("loginData", loginData)
-            navigate("/home")
+        if (loginData?.token || token) {
+            loginData?.token && localStorage.setItem(("loginData"), JSON.stringify(loginData))
+            dispatch(verifyJwt(loginData?.token || token))
         }
-        loginData && console.log(loginData);
     }, [loginData])
 
     useEffect(() => {
         if (registerData?.email) {
             toast.info(`${registerData?.firstName}, you can log in now`, {
-                autoClose: 2000
+                autoClose: 2000,
+                position: "top-center"
             })
             dispatch(clearRegisterData())
         }
 
         registerData && console.log(registerData);
     }, [registerData])
+
+    useEffect(() => {
+        if (verified) {
+            navigate("/home")
+        }
+
+        return () => {
+            loginData && dispatch((clearLoginData()))
+        }
+    }, [verified])
 
 
     return (
