@@ -43,7 +43,7 @@ const App = () => {
                 />
 
                 <Route
-                    path='/productDetail/:businessId'
+                    path='/productDetail/:id'
                     element={<ProductDetail />}
                 />
             </Routes>
