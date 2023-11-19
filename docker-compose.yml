@@ -4,8 +4,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: juannpz
-      POSTGRES_PASSWORD: 31139121
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
       POSTGRES_DB: viio
     ports:
       - 3001:5432
