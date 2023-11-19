@@ -21,3 +21,8 @@ npm install
 ```bash
 docker-compose up --build
 ```
+o bien ejecutar como superusuario en caso de ser necesario
+
+```bash
+sudo docker-compose up --build
+```
