@@ -1,4 +1,4 @@
-# Levantar el servidor y conectarse a la base de datos generada en Docker
+# Levantar el proyecto y conectarse a la base de datos generada en Docker
 
 1- Crear un archivo `.env` en el directorio `./server` con las siguientes líneas:
 
@@ -16,7 +16,7 @@ SECRET_KEY=randomKey
 npm install
 ```
 
-3- Crear y levantar los contonederoes docker. Ejecutar el comando en el directorio raíz del proyecto
+3- Crear y levantar los contenedores docker. Ejecutar el comando en el directorio raíz del proyecto:
 
 ```bash
 docker-compose up --build
