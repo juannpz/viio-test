@@ -55,6 +55,7 @@ const LoginForm = () => {
                 autoClose: 2000,
                 position: "top-center",
             })
+            dispatch(clearLoginData())
         }
 
         if (loginData?.token) {
@@ -71,20 +72,13 @@ const LoginForm = () => {
             })
             dispatch(clearRegisterData())
         }
-
-        registerData && console.log(registerData);
     }, [registerData])
 
     useEffect(() => {
         if (verified?.verified) {
             navigate("/home")
         }
-
-        return () => {
-            loginData && dispatch((clearLoginData()))
-        }
-    }, [verified?.verified])
-
+    }, [verified])
 
     return (
         <form

@@ -109,7 +109,7 @@ const Register = () => {
 
     useEffect(() => {
         return () => {
-            loginData?.token && dispatch(clearLoginData())
+            loginData && dispatch(clearLoginData())
         }
     }, [])
 
