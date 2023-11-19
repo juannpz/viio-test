@@ -9,7 +9,7 @@ const loginHandler = async (req, res) => {
     if (result) {
       res.status(200).json(result);
     } else {
-      res.status(401).json({ error: "Incorrect email or password. Try again" });
+      res.status(401).json({ error: "Wrong email or password. Try again" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
