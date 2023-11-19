@@ -1,6 +1,6 @@
 # Levantar el proyecto y conectarse a la base de datos generada en Docker
 
-1- Crear un archivo `.env` en el directorio `./server` con las siguientes líneas:
+1- Crear un archivo `.env` en el directorio `/server` con las siguientes líneas:
 
 ```env
 DB_USER=admin
@@ -10,7 +10,7 @@ DB_NAME=viio
 SECRET_KEY=randomKey
 ```
 
-2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `./client` y `./server`
+2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `/client` y `/server`
 
 ```bash
 npm install
