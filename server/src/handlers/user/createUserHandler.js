@@ -11,10 +11,10 @@ const createUserHandler = async (req, res) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-    });
+    })
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
-};
+}
 
-module.exports = createUserHandler;
+module.exports = createUserHandler

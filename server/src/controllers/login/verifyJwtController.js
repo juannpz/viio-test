@@ -4,4 +4,4 @@ const verifyJwtController = async () => {
     }
 };
 
-module.exports = verifyJwtController;
+module.exports = verifyJwtController

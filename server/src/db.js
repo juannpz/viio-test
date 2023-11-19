@@ -1,8 +1,8 @@
-require("dotenv").config();
-const { Sequelize } = require('sequelize');
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
-const UserModel = require("./models/User");
-const ProductModel = require("./models/Product");
+require("dotenv").config()
+const { Sequelize } = require('sequelize')
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env
+const UserModel = require("./models/User")
+const ProductModel = require("./models/Product")
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
     {
@@ -11,13 +11,13 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
     }
 )
 
-UserModel(sequelize);
-ProductModel(sequelize);
+UserModel(sequelize)
+ProductModel(sequelize)
 
-const { User, Product } = sequelize.models;
+const { User, Product } = sequelize.models
 
 module.exports = {
     User,
     Product,
     conn: sequelize,
-};
+}
