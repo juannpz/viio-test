@@ -10,6 +10,8 @@ DB_NAME=viio
 SECRET_KEY=randomKey
 ```
 
+
+
 2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `/client` y `/server`
 
 ```bash
