@@ -9,12 +9,12 @@ DB_NAME=viio
 SECRET_KEY=randomKey
 ```
 
-2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `/client` y `/server`
+  2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `/client` y `/server`
 ```bash
 npm install
 ```
 
-3- Crear y levantar los contenedores docker. Ejecutar el comando en el directorio raíz del proyecto:
+  3- Crear y levantar los contenedores docker. Ejecutar el comando en el directorio raíz del proyecto:
 ```bash
 docker-compose up --build
 ```
