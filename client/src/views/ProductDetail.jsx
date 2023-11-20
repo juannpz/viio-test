@@ -27,24 +27,24 @@ const ProductDetail = () => {
 
             <img
                 className="w-full h-64 object-contain"
-                src={product.thumbnail}
-                alt={product.title} />
+                src={product?.thumbnail}
+                alt={product?.title} />
 
             <div
                 className="p-4">
                 <h1
                     className="text-2xl font-semibold text-blue-700 mb-4">
-                    {product.title}
+                    {product?.title}
                 </h1>
 
                 <h2
                     className="text-lg font-semibold text-blue-700">
-                    {product.brand}
+                    {product?.brand}
                 </h2>
 
                 <p
                     className="text-sm text-gray-500">
-                    {product.description}
+                    {product?.description}
                 </p>
 
                 <div
@@ -52,34 +52,34 @@ const ProductDetail = () => {
 
                     <span
                         className="text-yellow-400 mr-2">
-                        {"⭐".repeat(Math.round(product.rating))}
+                        {"⭐".repeat(Math.round(product?.rating))}
                     </span>
 
                     <span
                         className='text-gray-500'>
-                        ({product.rating})
+                        ({product?.rating})
                     </span>
                 </div>
 
                 <p
                     className="mt-2 text-lg font-semibold text-green-600">
-                    ${product.price}
+                    ${product?.price}
                 </p>
 
                 <p
                     className="mt-2 text-sm text-gray-500">
-                    Stock: {product.stock}
+                    Stock: {product?.stock}
                 </p>
 
                 <p
                     className="mt-2 text-sm text-gray-500">
-                    Categoría: {product.category}
+                    Categoría: {product?.category}
                 </p>
 
-                {product.discount && (
+                {product?.discount && (
                     <p
                         className="mt-2 text-sm text-red-500">
-                        Descuento: {product.discount}%
+                        Descuento: {product?.discount}%
                     </p>
                 )}
             </div>
