@@ -6,7 +6,7 @@ import Register from './components/forms/RegisterForm'
 import { ToastContainer } from 'react-toastify';
 import Landing from './views/Landing'
 import { useDispatch, useSelector } from 'react-redux';
-import ProductDetail from './components/ProductDetail';
+import ProductDetail from './views/ProductDetail';
 import { useEffect } from 'react';
 import { verifyJwt } from './redux/actions/login/verifyJwt';
 
