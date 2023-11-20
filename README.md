@@ -7,6 +7,7 @@ DB_PASSWORD=admin
 DB_HOST=db
 DB_NAME=viio
 SECRET_KEY=randomKey
+PORT=3001
 ```
 
 2- Instalar de forma manual las dependencias del servidor y del cliente. Ejecutar el comando en ambos directorios, `/client` y `/server`
