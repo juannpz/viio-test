@@ -6,7 +6,7 @@ DB_USER=admin
 DB_PASSWORD=admin
 DB_HOST=db
 DB_NAME=viio
-SECRET_KEY=randomKey
+JWT_SECRET_KEY=randomKey
 PORT=3001
 ```
 
