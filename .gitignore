@@ -1,6 +1,5 @@
 **/node_modules/
 **/*.env
-**/*.sql
 **/*.cjs
 npm-debug.log
 npm
