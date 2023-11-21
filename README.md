@@ -7,7 +7,7 @@ DB_PASSWORD=admin
 DB_HOST=db
 DB_NAME=viio
 JWT_SECRET_KEY=randomKey
-PORT=3001
+PORT=3000
 ```
 
 2- Instalar de forma manual las dependencias del servidor y del cliente ejecutando `npm install` en ambos directorios, `/client` y `/server`
