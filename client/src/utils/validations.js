@@ -8,11 +8,11 @@ export const validate = (formData) => {
             if (value.length > 0) {
                 if (!errors[key]) errors[key] = undefined;
                 if (key === "password" && !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()\-_=+{};:,.<>?~`|[\]\\]{8,}$/.test(value)) {
-                    errors[key] = "Debe contener al menos una minúscula, una mayúscula y un número";
+                    errors[key] = "At least one lowercase character, one uppercase character, one numeric digit";
                 } else if (key === "email" && !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
-                    errors[key] = "Formato incorrecto";
+                    errors[key] = "Wrong email format";
                 } else if ((key === "firstName" || key === "lastName") && !/^[a-zA-ZÀ-ÿ\s]+$/.test(value)) {
-                    errors[key] = "No se permiten caracteres especiales";
+                    errors[key] = "Numbers and special characters are not allowed";
                 }
             }
         }
