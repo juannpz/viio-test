@@ -1,6 +1,6 @@
 # Levantar el proyecto y conectarse a la base de datos generada en Docker
 
-1- Crear un archivo `.env` en el directorio `/server` con las siguientes líneas:
+1- Crear un archivo `.env` en el directorio `/server` con el siguiente contenido:
 ```env
 DB_USER=admin
 DB_PASSWORD=admin
