@@ -71,7 +71,7 @@ const Register = () => {
             })
         }
         else if (errorExist) {
-            toast.warn("Check invalid fields to continue", {
+            toast.warn("Check invalid fields", {
                 autoClose: 2000,
                 position: "top-center",
             })
